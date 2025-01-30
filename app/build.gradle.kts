@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.gulbit"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.gulbit"
@@ -49,8 +49,9 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     // Room 관련 종속성
-    implementation ("androidx.room:room-runtime:2.4.2")
-    kapt("androidx.room:room-compiler:2.4.2")
+    implementation ("androidx.room:room-runtime:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    implementation ("androidx.room:room-ktx:2.6.1")
     // Kotlin 사용자
 
     // LiveData 및 ViewModel 종속성

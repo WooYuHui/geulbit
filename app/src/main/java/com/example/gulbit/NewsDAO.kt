@@ -13,6 +13,6 @@ interface NewsDAO {
     @Query("SELECT * FROM news_table")
     suspend fun getAllNews(): List<News>
 
-    @Query("SELECT * FROM news_table WHERE id = :id LIMIT 1")
-    suspend fun getNewsById(id: Int): News
+    @Query("SELECT * FROM news_table WHERE id = :id")
+    suspend fun getNewsById(id: Int): News?
 }
