@@ -1,4 +1,5 @@
 package com.example.gulbit
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -39,21 +40,35 @@ class MainActivity : AppCompatActivity() {
 
         // 데이터베이스에서 뉴스 목록을 비동기로 가져옴
         lifecycleScope.launch {
+            // Room 데이터베이스 객체 가져오기
             val db = withContext(Dispatchers.IO) {
                 Room.databaseBuilder(applicationContext, AppDatabase::class.java, "news_database").build()
             }
+
+            // 데이터베이스에서 뉴스 목록 가져오기
             newsList = withContext(Dispatchers.IO) { db.newsDao().getAllNews() }
 
+            // 뉴스 목록이 비어 있으면 JSON 파일에서 뉴스 로드하여 삽입
             if (newsList.isEmpty()) {
-                loadAndInsertNewsFromJson(db)
+                loadAndInsertNewsFromJson(db) // 뉴스리스트를 넣었음
                 newsList = withContext(Dispatchers.IO) { db.newsDao().getAllNews() }
             }
 
+            // 오늘 날짜인지 확인하고 뉴스 변경
             if (newsHelper.isNewDay()) {
-                changeNews()
+                changeNews()  // 새로운 날이라면 뉴스 변경
             } else {
-                currentNews?.let {
-                    textView.text = it.title
+                // 오늘 날짜와 일치하는 뉴스 찾기
+                val todayDate = newsHelper.getTodayDate()
+                currentNews = newsList.find { it.date == todayDate }
+
+                Log.d("MainActivity", "오늘 날짜의 뉴스 가져오기: $currentNews")
+
+                // 찾은 뉴스가 있으면 내용 표시, 없으면 기본 메시지
+                if (currentNews != null) {
+                    textView.text = currentNews!!.content
+                } else {
+                    textView.text = "오늘의 뉴스가 없습니다."
                 }
             }
         }
@@ -66,6 +81,8 @@ class MainActivity : AppCompatActivity() {
         // "이해했어요" 버튼 누를 시 다음 화면으로
         yesButton.setOnClickListener {
             // 다음 화면으로 이동
+            val intent = Intent(this, ReviewNote::class.java)
+            startActivity(intent)
         }
     }
 
@@ -73,10 +90,16 @@ class MainActivity : AppCompatActivity() {
         val todayDate = newsHelper.getTodayDate()
         currentNews = newsList.find { it.date == todayDate }
 
-        if (currentNews != null) {
-            textView.text = currentNews!!.title
-        } else {
-            textView.text = "오늘의 뉴스가 없습니다." // 예외 처리
+        // UI 업데이트는 반드시 메인 스레드에서 해야 함
+        Log.d("MainActivity", "오늘의 날짜: $todayDate")
+        Log.d("MainActivity", "현재 뉴스: $currentNews")
+
+        runOnUiThread {
+            if (currentNews != null) {
+                textView.text = currentNews!!.content  // content를 출력
+            } else {
+                textView.text = "오늘의 뉴스가 없습니다." // 예외 처리
+            }
         }
 
         newsHelper.saveTodayDate(todayDate)
