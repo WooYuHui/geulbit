@@ -56,5 +56,6 @@ dependencies {
     // LiveData 및 ViewModel 종속성
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+    implementation ("com.google.code.gson:gson:2.8.8")
 
 }

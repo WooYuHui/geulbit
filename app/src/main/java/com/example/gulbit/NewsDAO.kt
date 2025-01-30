@@ -4,11 +4,11 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 
-// 데이터 삽입 맟 조회 메서드
+// 데이터 삽입 및 조회 메서드
 @Dao
 interface NewsDAO {
     @Insert
-    suspend fun insert(news: News)
+    suspend fun insertAll(newsList: List<News>)
 
     @Query("SELECT * FROM news_table")
     suspend fun getAllNews(): List<News>

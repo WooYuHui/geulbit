@@ -9,6 +9,6 @@ import androidx.room.PrimaryKey
 data class News(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val title: String,
-    val content: Long,
-    val date: Long // 날짜 설정
+    val content: String,
+    val date: String // 날짜 설정
 )
