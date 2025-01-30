@@ -2,6 +2,7 @@ package com.example.gulbit
 
 import android.content.Context
 import android.content.SharedPreferences
+import java.text.SimpleDateFormat
 import java.util.*
 
 //매일 뉴스 항목을 바꾸기 위해 오늘 날짜를 SharedPreferences에 저장하고,
@@ -15,10 +16,8 @@ class NewsHelper(context: Context) {
     // 오늘 날짜 가져오기 (yyyyMMdd 형식)
     fun getTodayDate(): String {
         val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH) + 1 // 0부터 시작하므로 1을 더함
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-        return "$year$month$day"
+        val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        return format.format(calendar.time)
     }
 
     // 오늘 날짜 저장하기

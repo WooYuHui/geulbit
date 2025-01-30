@@ -1,6 +1,7 @@
 package com.example.gulbit
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -38,19 +39,19 @@ class MainActivity : AppCompatActivity() {
 
         // 데이터베이스에서 뉴스 목록을 비동기로 가져옴
         lifecycleScope.launch {
-            val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "news_database").build()
-            newsList = db.newsDao().getAllNews()
+            val db = withContext(Dispatchers.IO) {
+                Room.databaseBuilder(applicationContext, AppDatabase::class.java, "news_database").build()
+            }
+            newsList = withContext(Dispatchers.IO) { db.newsDao().getAllNews() }
 
-            // 데이터가 비어 있으면 JSON에서 불러와서 삽입
             if (newsList.isEmpty()) {
                 loadAndInsertNewsFromJson(db)
+                newsList = withContext(Dispatchers.IO) { db.newsDao().getAllNews() }
             }
 
-            // 오늘 날짜가 바뀌었으면 뉴스 변경
             if (newsHelper.isNewDay()) {
                 changeNews()
             } else {
-                // 이미 저장된 뉴스 표시
                 currentNews?.let {
                     textView.text = it.title
                 }
@@ -59,7 +60,7 @@ class MainActivity : AppCompatActivity() {
 
         // "잘 이해 못했어요" 버튼 누를 시 설명 표시
         noButton.setOnClickListener {
-
+            addExplain.visibility = View.VISIBLE
         }
 
         // "이해했어요" 버튼 누를 시 다음 화면으로
@@ -69,39 +70,40 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun changeNews() {
-        // 오늘 날짜에 해당하는 뉴스 항목을 찾기
         val todayDate = newsHelper.getTodayDate()
-
-        // 오늘 날짜에 해당하는 뉴스 항목을 찾고, 다음 뉴스로 변경
         currentNews = newsList.find { it.date == todayDate }
 
-        currentNews?.let {
-            textView.text = it.title
+        if (currentNews != null) {
+            textView.text = currentNews!!.title
+        } else {
+            textView.text = "오늘의 뉴스가 없습니다." // 예외 처리
         }
 
-        // 오늘 날짜를 SharedPreferences에 저장
         newsHelper.saveTodayDate(todayDate)
     }
 
     private suspend fun loadAndInsertNewsFromJson(db: AppDatabase) {
-        // assets 폴더에서 JSON 파일 읽기
         val newsListFromJson = loadNewsFromAssets()
-
-        // Room 데이터베이스에 뉴스 리스트 삽입
         val newsDao = db.newsDao()
-        newsDao.insertAll(newsListFromJson)
 
-        // 데이터베이스에 저장된 뉴스 목록 가져오기
+        withContext(Dispatchers.IO) {
+            newsDao.insertAll(newsListFromJson)
+        }
+
+        // 삽입 후 데이터 다시 가져오기
         newsList = newsDao.getAllNews()
     }
 
     private fun loadNewsFromAssets(): List<News> {
-        val jsonString = assets.open("news_data.json").use {
-            InputStreamReader(it).readText()
+        return try {
+            val jsonString = assets.open("news_data.json").use {
+                InputStreamReader(it).readText()
+            }
+            val newsType = object : TypeToken<List<News>>() {}.type
+            Gson().fromJson(jsonString, newsType) ?: emptyList()
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Error loading news from JSON", e)
+            emptyList()
         }
-
-        // Gson을 사용해 JSON을 List<News>로 변환
-        val newsType = object : TypeToken<List<News>>() {}.type
-        return Gson().fromJson(jsonString, newsType)
     }
 }
