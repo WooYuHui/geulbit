@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_learning"
+        android:icon="@drawable/baseline_circle_24"
+        android:title="학습"/>
+    <item
+        android:id="@+id/nav_sentence"
+        android:icon="@drawable/baseline_dehaze_24"
+        android:title="문장구성력"/>
+    <item
+        android:id="@+id/nav_timed_course"
+        android:icon="@drawable/group"
+        android:title="시간별 코스"/>
+</menu>

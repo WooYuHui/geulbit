@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/nav_learning">
+    <fragment
+        android:id="@+id/nav_learning"
+        android:name="com.example.gulbit.fragment.VocabularyFragment"
+        android:label="fragment_vocabulary"
+        tools:layout="@layout/fragment_vocabulary" >
+        <action
+            android:id="@+id/action_vocabularyFragment2_to_sententceFragment2"
+            app:destination="@id/nav_sentence" />
+        <action
+            android:id="@+id/action_vocabularyFragment2_to_hourFragment2"
+            app:destination="@id/nav_timed_course" />
+        <action
+            android:id="@+id/action_nav_learning_to_wordCardFragment"
+            app:destination="@id/wordCardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_timed_course"
+        android:name="com.example.gulbit.fragment.HourFragment"
+        android:label="fragment_hour"
+        tools:layout="@layout/fragment_hour" >
+        <action
+            android:id="@+id/action_hourFragment2_to_vocabularyFragment2"
+            app:destination="@id/nav_learning" />
+        <action
+            android:id="@+id/action_hourFragment2_to_sententceFragment2"
+            app:destination="@id/nav_sentence" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_sentence"
+        android:name="com.example.gulbit.fragment.SententceFragment"
+        android:label="fragment_sententce"
+        tools:layout="@layout/fragment_sententce" >
+        <action
+            android:id="@+id/action_sententceFragment2_to_hourFragment2"
+            app:destination="@id/nav_timed_course" />
+        <action
+            android:id="@+id/action_sententceFragment2_to_vocabularyFragment2"
+            app:destination="@id/nav_learning" />
+    </fragment>
+    <fragment
+        android:id="@+id/wordCardFragment"
+        android:name="com.example.gulbit.fragment.WordCardFragment"
+        android:label="fragment_word_card"
+        tools:layout="@layout/fragment_word_card" >
+        <action
+            android:id="@+id/action_wordCardFragment_to_nav_learning"
+            app:destination="@id/nav_learning" />
+    </fragment>
+</navigation>

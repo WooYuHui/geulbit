@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.VocabularyFragment">
+
+    <!-- 앱 제목 -->
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="70dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/gulbit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 앱 설명 -->
+    <TextView
+        android:id="@+id/tv_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="매일 한 단어, 내일의 나를 만들어 나가기"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView4" />
+
+    <!-- 어휘력 학습 제목 -->
+    <TextView
+        android:id="@+id/tv_vocab_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:text="어휘력 학습"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_subtitle" />
+
+    <!-- 학습 카드 -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_vocab"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_vocab_title">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#EBEBEB"
+            android:padding="16dp">
+
+            <!-- 설명 -->
+            <TextView
+                android:id="@+id/tv_vocab_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="글빛 님의 어휘력을 높여 볼까요?"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!-- 책 이미지 -->
+            <ImageView
+                android:id="@+id/iv_book"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/tv_vocab_description"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/book_icon" />
+
+            <!-- 현재 개수 -->
+            <TextView
+                android:id="@+id/tv_vocab_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_vocab_description"
+                android:layout_marginStart="95dp"
+                android:layout_toEndOf="@id/iv_book"
+                android:text="0개"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <!-- 학습하기 버튼 -->
+            <Button
+                android:id="@+id/btn_learn"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/tv_vocab_count"
+                android:layout_toEndOf="@id/iv_book"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/material_dynamic_neutral30"
+                android:text="학습하기"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- 문해력 테스트 제목 -->
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:text="문해력테스트"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_vocab" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_vocab2"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView4">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#EBEBEB"
+            android:padding="16dp">
+
+            <!-- 설명 -->
+            <TextView
+                android:id="@+id/tv_literacy_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="글빛 님의 문해력을 테스트해 볼까요?"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!-- 책 이미지 -->
+            <ImageView
+                android:id="@+id/iv_books"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/tv_literacy_description"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/books_icon" />
+
+            <!-- 시작하기 버튼 -->
+            <Button
+                android:id="@+id/btn_start"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="50dp"
+                android:layout_toEndOf="@id/iv_books"
+                android:backgroundTint="@color/material_dynamic_neutral30"
+                android:text="시작하기"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- 오답 노트 제목 -->
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:text="오답 노트"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_vocab2" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_vocab3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#EBEBEB"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tv_wronganswer_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="잘 몰랐던 단어를 다시 복습해 볼까요?"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_check"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/material_dynamic_neutral30"
+                android:minWidth="80dp"
+                android:text="확인하기"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
