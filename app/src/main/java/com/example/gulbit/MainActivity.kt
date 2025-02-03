@@ -1,5 +1,6 @@
 package com.example.gulbit
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         word2= findViewById(R.id.word2)
         btn1 = findViewById(R.id.noteBtn1)
         btn2 = findViewById(R.id.noteBtn2)
+
 
         // SQLite 데이터베이스 헬퍼 초기화
         dbHelper = NewsDatabaseHelper(this)

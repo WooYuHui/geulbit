@@ -24,8 +24,9 @@
         android:layout_height="wrap_content"
         android:text="칼럼 내용"
         android:layout_marginBottom="20dp"
-        android:background="#F6D1D1"
+        android:background="@drawable/rounded_text"
         android:textColor="@color/black"
+        android:padding="10dp"
          />
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,18 +38,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/dontKnow"
+            android:textStyle="bold"
             android:text="잘 이해하지 못했어요"
             android:layout_weight="1"
             android:layout_marginRight="50dp"
-            android:background="#D4B69F"
+            android:background="@drawable/rounded_button"
+
+
             />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/didKnow"
+            android:textStyle="bold"
             android:text="이해했어요"
             android:layout_weight="4"
-            android:background="#D4B69F"/>
+            android:background="@drawable/rounded_button"
+           />
 
 
     </LinearLayout>
@@ -71,14 +77,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@drawable/rounded_text">
 
             <TextView
                 android:id="@+id/word1"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
-                android:paddingTop="10dp"
+                android:padding="10dp"
                 android:layout_weight="4"
                 android:textSize="16dp"
                 android:text="예시 단어 1" />
@@ -99,14 +106,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@drawable/rounded_text"
+            android:layout_marginTop="20dp">
 
             <TextView
                 android:id="@+id/word2"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
-                android:paddingTop="10dp"
+                android:padding="10dp"
                 android:layout_weight="4"
                 android:textSize="16dp"
                 android:text="예시 단어 2" />
