@@ -1,30 +1,26 @@
 package com.example.gulbit
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import androidx.room.Room
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.io.InputStreamReader
+import com.example.gulbit.database.NewsDatabaseHelper
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var textView: TextView
     private lateinit var noButton: Button
     private lateinit var yesButton: Button
-    private var newsList: List<News> = emptyList()
-    private var currentNews: News? = null
     private lateinit var newsHelper: NewsHelper
+    private lateinit var dbHelper: NewsDatabaseHelper
     private lateinit var addExplain: LinearLayout
+    private lateinit var word1: TextView
+    private lateinit var word2: TextView
+    private lateinit var btn1: Button
+    private lateinit var btn2: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,99 +30,117 @@ class MainActivity : AppCompatActivity() {
         noButton = findViewById(R.id.dontKnow)
         yesButton = findViewById(R.id.didKnow)
         addExplain = findViewById(R.id.addExplain)
+        word1 = findViewById(R.id.word1)
+        word2= findViewById(R.id.word2)
+        btn1 = findViewById(R.id.noteBtn1)
+        btn2 = findViewById(R.id.noteBtn2)
 
-        // NewsHelper 객체 생성
+        // SQLite 데이터베이스 헬퍼 초기화
+        dbHelper = NewsDatabaseHelper(this)
         newsHelper = NewsHelper(this)
 
-        // 데이터베이스에서 뉴스 목록을 비동기로 가져옴
-        lifecycleScope.launch {
-            // Room 데이터베이스 객체 가져오기
-            val db = withContext(Dispatchers.IO) {
-                Room.databaseBuilder(applicationContext, AppDatabase::class.java, "news_database").build()
-            }
-
-            // 데이터베이스에서 뉴스 목록 가져오기
-            newsList = withContext(Dispatchers.IO) { db.newsDao().getAllNews() }
-
-            // 뉴스 목록이 비어 있으면 JSON 파일에서 뉴스 로드하여 삽입
-            if (newsList.isEmpty()) {
-                loadAndInsertNewsFromJson(db) // 뉴스리스트를 넣었음
-                newsList = withContext(Dispatchers.IO) { db.newsDao().getAllNews() }
-            }
-
-            // 오늘 날짜인지 확인하고 뉴스 변경
-            if (newsHelper.isNewDay()) {
-                changeNews()  // 새로운 날이라면 뉴스 변경
-            } else {
-                // 오늘 날짜와 일치하는 뉴스 찾기
-                val todayDate = newsHelper.getTodayDate()
-                currentNews = newsList.find { it.date == todayDate }
-
-                Log.d("MainActivity", "오늘 날짜의 뉴스 가져오기: $currentNews")
-
-                // 찾은 뉴스가 있으면 내용 표시, 없으면 기본 메시지
-                if (currentNews != null) {
-                    textView.text = currentNews!!.content
-                } else {
-                    textView.text = "오늘의 뉴스가 없습니다."
-                }
-            }
+        // 오늘 날짜 확인 후 뉴스 변경
+        if (newsHelper.isNewDay()) {
+            changeNews()
+        } else {
+            showTodayNews()
         }
 
-        // "잘 이해 못했어요" 버튼 누를 시 설명 표시
+        // "잘 이해 못했어요" 버튼 클릭 시 설명 추가 표시
         noButton.setOnClickListener {
             addExplain.visibility = View.VISIBLE
         }
 
-        // "이해했어요" 버튼 누를 시 다음 화면으로
+        // "이해했어요" 버튼 클릭 시 다음 화면으로 이동
         yesButton.setOnClickListener {
-            // 다음 화면으로 이동
             val intent = Intent(this, ReviewNote::class.java)
             startActivity(intent)
+        }
+
+        btn1.setOnClickListener{
+            val word = word1.text.toString()
+            val meaning = dbHelper.getMeaningForWord(word)
+            val todayDate = newsHelper.getTodayDate()
+
+            if (meaning != null) {
+                // 북마크 추가
+                dbHelper.addBookmark(word, meaning, todayDate)
+
+                Toast.makeText(this, "$word 단어가 북마크되었습니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "$word 의 의미를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        btn2.setOnClickListener{
+            val word = word2.text.toString()
+            val meaning = dbHelper.getMeaningForWord(word)
+            val todayDate = newsHelper.getTodayDate()
+
+            if (meaning != null) {
+                // 북마크 추가
+                dbHelper.addBookmark(word, meaning, todayDate)
+
+                Toast.makeText(this, "$word 단어가 북마크되었습니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "$word 의 의미를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+
+
+    private fun showTodayNews() {
+        val todayDate = newsHelper.getTodayDate()
+        val (newsContent, newsId) = dbHelper.getNewsByDate(todayDate)
+
+        // UI 스레드에서 처리
+        runOnUiThread {
+            textView.text = newsContent ?: "오늘의 뉴스가 없습니다."
+
+            // 뉴스 ID가 0 이상일 경우, 단어들 가져오기
+            if (newsId > 0) {
+                val newsWords = dbHelper.getWordsForNews(newsId)
+
+                // 단어가 있으면 word1, word2에 설정
+                if (newsWords.isNotEmpty()) {
+                    word1.text = newsWords.getOrNull(0)?.first ?: "단어 없음"
+                    word2.text = newsWords.getOrNull(1)?.first ?: "단어 없음"
+                }
+            } else {
+                // 뉴스 ID가 잘못되었을 경우 "단어 없음" 표시
+                word1.text = "단어 없음"
+                word2.text = "단어 없음"
+            }
         }
     }
 
     private fun changeNews() {
         val todayDate = newsHelper.getTodayDate()
-        currentNews = newsList.find { it.date == todayDate }
 
-        // UI 업데이트는 반드시 메인 스레드에서 해야 함
-        Log.d("MainActivity", "오늘의 날짜: $todayDate")
-        Log.d("MainActivity", "현재 뉴스: $currentNews")
+        val (newsContent, newsId) = dbHelper.getNewsByDate(todayDate)
 
+        // 뉴스 콘텐츠 띄우기
         runOnUiThread {
-            if (currentNews != null) {
-                textView.text = currentNews!!.content  // content를 출력
+            textView.text = newsContent ?: "오늘의 뉴스가 없습니다."
+
+            // 뉴스 ID가 0 이상일 경우, 관련 단어들을 가져오기
+            if (newsId > 0) {
+                val newsWords = dbHelper.getWordsForNews(newsId)
+
+                // 단어들이 있으면 word1, word2에 설정
+                if (newsWords.isNotEmpty()) {
+                    word1.text = newsWords.getOrNull(0)?.first ?: "단어 없음"
+                    word2.text = newsWords.getOrNull(1)?.first ?: "단어 없음"
+                }
             } else {
-                textView.text = "오늘의 뉴스가 없습니다." // 예외 처리
+                // 뉴스 ID가 0인 경우 "단어 없음" 표시
+                word1.text = "단어 없음"
+                word2.text = "단어 없음"
             }
         }
 
+        // 오늘 날짜를 저장
         newsHelper.saveTodayDate(todayDate)
-    }
-
-    private suspend fun loadAndInsertNewsFromJson(db: AppDatabase) {
-        val newsListFromJson = loadNewsFromAssets()
-        val newsDao = db.newsDao()
-
-        withContext(Dispatchers.IO) {
-            newsDao.insertAll(newsListFromJson)
-        }
-
-        // 삽입 후 데이터 다시 가져오기
-        newsList = newsDao.getAllNews()
-    }
-
-    private fun loadNewsFromAssets(): List<News> {
-        return try {
-            val jsonString = assets.open("news_data.json").use {
-                InputStreamReader(it).readText()
-            }
-            val newsType = object : TypeToken<List<News>>() {}.type
-            Gson().fromJson(jsonString, newsType) ?: emptyList()
-        } catch (e: Exception) {
-            Log.e("MainActivity", "Error loading news from JSON", e)
-            emptyList()
-        }
     }
 }
