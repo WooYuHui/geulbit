@@ -57,14 +57,14 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // 첫번째 북마크 버튼
         btn1.setOnClickListener{
             val word = word1.text.toString()
             val meaning = dbHelper.getMeaningForWord(word)
-            val todayDate = newsHelper.getTodayDate()
 
             if (meaning != null) {
                 // 북마크 추가
-                dbHelper.addBookmark(word, meaning, todayDate)
+                dbHelper.addBookmark(word, meaning)
 
                 Toast.makeText(this, "$word 단어가 북마크되었습니다.", Toast.LENGTH_SHORT).show()
             } else {
@@ -72,14 +72,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // 두번째 북마크 버튼
         btn2.setOnClickListener{
             val word = word2.text.toString()
             val meaning = dbHelper.getMeaningForWord(word)
-            val todayDate = newsHelper.getTodayDate()
 
             if (meaning != null) {
                 // 북마크 추가
-                dbHelper.addBookmark(word, meaning, todayDate)
+                dbHelper.addBookmark(word, meaning)
 
                 Toast.makeText(this, "$word 단어가 북마크되었습니다.", Toast.LENGTH_SHORT).show()
             } else {

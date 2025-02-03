@@ -29,10 +29,10 @@ class NewsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         val createBookmarkTable = """
             CREATE TABLE IF NOT EXISTS $TABLE_BOOKMARKS (
                 $COLUMN_WORD TEXT NOT NULL,
-                $COLUMN_MEANING TEXT NOT NULL,
-                $COLUMN_DATE TEXT
+                $COLUMN_MEANING TEXT NOT NULL
                             );
         """.trimIndent()
+        db.execSQL(createBookmarkTable)
 
 
         // 기본 뉴스 데이터 삽입
@@ -129,19 +129,38 @@ class NewsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         return meaning
     }
 
-    fun addBookmark(word: String, meaning: String, date: String) {
+    fun addBookmark(word: String, meaning: String) {
         val db = writableDatabase
         val contentValues = ContentValues()
         contentValues.put(COLUMN_WORD, word)
         contentValues.put(COLUMN_MEANING, meaning)
-        contentValues.put(COLUMN_DATE, date)
 
         db.insert(TABLE_BOOKMARKS, null, contentValues)
         db.close()
     }
+
+    fun getAllBookmarks(): List<Bookmark> {
+        val db = readableDatabase
+        val cursor = db.query(
+            TABLE_BOOKMARKS,
+            arrayOf(COLUMN_WORD, COLUMN_MEANING),
+            null, null, null, null, null
+        )
+
+        val bookmarkList = mutableListOf<Bookmark>()
+        while (cursor.moveToNext()) {
+            val word = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_WORD))
+            val meaning = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MEANING))
+            bookmarkList.add(Bookmark(word, meaning))
+        }
+        cursor.close()
+        db.close()
+        return bookmarkList
+    }
+
     companion object {
         private const val DATABASE_NAME = "news_database.db"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 2
         private const val TABLE_NEWS = "news"
         private const val COLUMN_NEWS_ID = "news_id"
         private const val COLUMN_DATE = "date"
