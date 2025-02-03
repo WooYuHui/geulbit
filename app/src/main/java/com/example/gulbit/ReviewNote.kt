@@ -1,6 +1,7 @@
 package com.example.gulbit
 
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +18,7 @@ class ReviewNote : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.reviewnote)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) // 뒤로가기버튼
 
         // RecyclerView 설정
         recyclerView = findViewById(R.id.recyclerView)
@@ -29,6 +31,11 @@ class ReviewNote : AppCompatActivity() {
         // 어댑터 연결
         bookmarkAdapter = BookmarkAdapter(this, bookmarks)
         recyclerView.adapter = bookmarkAdapter
+
+        val finishBtn: Button = findViewById(R.id.finishBtn)
+        finishBtn.setOnClickListener{
+            finish()
+        }
     }
 
 }

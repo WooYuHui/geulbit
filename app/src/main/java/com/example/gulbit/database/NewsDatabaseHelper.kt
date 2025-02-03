@@ -158,9 +158,32 @@ class NewsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         return bookmarkList
     }
 
+    fun isBookmarkExist(word: String): Boolean { // 중복 검증
+        val db = readableDatabase
+        val cursor = db.query(
+            TABLE_BOOKMARKS,
+            arrayOf(COLUMN_WORD),
+            "$COLUMN_WORD = ?",
+            arrayOf(word),
+            null, null, null
+        )
+
+        val exists = cursor.count > 0  // 단어가 존재하면 true, 아니면 false
+        cursor.close()
+        db.close()
+
+        return exists
+    }
+
+    fun clearAllBookmarks() { // 북마크 초기화
+        val db = writableDatabase
+        db.delete(TABLE_BOOKMARKS, null, null)
+        db.close()
+    }
+
     companion object {
         private const val DATABASE_NAME = "news_database.db"
-        private const val DATABASE_VERSION = 2
+        private const val DATABASE_VERSION = 3
         private const val TABLE_NEWS = "news"
         private const val COLUMN_NEWS_ID = "news_id"
         private const val COLUMN_DATE = "date"

@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ReviewNote"
+            android:parentActivityName=".MainActivity"
             android:label="오답 노트">
         </activity>
     </application>

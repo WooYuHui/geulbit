@@ -3,6 +3,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -19,12 +20,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var addExplain: LinearLayout
     private lateinit var word1: TextView
     private lateinit var word2: TextView
-    private lateinit var btn1: Button
-    private lateinit var btn2: Button
+    private lateinit var btn1: ImageButton
+    private lateinit var btn2: ImageButton
 
+    @Override
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) // 뒤로가기버튼
 
         textView = findViewById(R.id.contents)
         noButton = findViewById(R.id.dontKnow)
@@ -38,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         // SQLite 데이터베이스 헬퍼 초기화
         dbHelper = NewsDatabaseHelper(this)
         newsHelper = NewsHelper(this)
+        dbHelper.clearAllBookmarks()
 
         // 오늘 날짜 확인 후 뉴스 변경
         if (newsHelper.isNewDay()) {
@@ -62,13 +66,11 @@ class MainActivity : AppCompatActivity() {
             val word = word1.text.toString()
             val meaning = dbHelper.getMeaningForWord(word)
 
-            if (meaning != null) {
-                // 북마크 추가
+            if (!dbHelper.isBookmarkExist(word) && meaning !=null) { // 중복 검증
                 dbHelper.addBookmark(word, meaning)
-
                 Toast.makeText(this, "$word 단어가 북마크되었습니다.", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "$word 의 의미를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "$word 단어는 이미 북마크에 추가되어 있습니다.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -77,13 +79,11 @@ class MainActivity : AppCompatActivity() {
             val word = word2.text.toString()
             val meaning = dbHelper.getMeaningForWord(word)
 
-            if (meaning != null) {
-                // 북마크 추가
+            if (!dbHelper.isBookmarkExist(word) && meaning !=null) { // 중복 검증
                 dbHelper.addBookmark(word, meaning)
-
                 Toast.makeText(this, "$word 단어가 북마크되었습니다.", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "$word 의 의미를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "$word 단어는 이미 북마크에 추가되어 있습니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }
