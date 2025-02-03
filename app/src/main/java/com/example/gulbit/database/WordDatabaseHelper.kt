@@ -20,7 +20,7 @@ class WordDatabaseHelper(context: Context) :
         """.trimIndent()
         db.execSQL(createTableQuery)
 
-        // 📌 단어 20개 추가
+        //  단어 20개 추가
         insertInitialWords(db)
     }
 

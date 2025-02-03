@@ -1,9 +1,12 @@
-package com.example.gulbit.fragment;
+
+package com.example.gulbit.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.gulbit.R
@@ -29,6 +32,8 @@ class WordCardFragment : Fragment(R.layout.fragment_word_card) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val toolbar: Toolbar = view.findViewById(R.id.toolbar) // androidx.appcompat.widget.Toolbar 사용
+
         // DB 초기화
         dbHelper = WordDatabaseHelper(requireContext())
         wordList = dbHelper.readableDatabase.let { dbHelper ->
@@ -48,8 +53,17 @@ class WordCardFragment : Fragment(R.layout.fragment_word_card) {
             words
         }
 
-        // ✅ View Binding 사용하여 viewPager 접근
+        //  View Binding 사용하여 viewPager 접근
         binding.viewPager.adapter = WordPagerAdapter(wordList)
         binding.viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+        // 툴바를 액션바로 설정
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+
+        // 내비게이션 아이콘(뒤로가기 아이콘) 클릭 리스너 설정
+        toolbar.setNavigationOnClickListener {
+            // 백 버튼 클릭 시 이전 화면으로 돌아감
+            requireActivity().onBackPressed()
+        }
     }
 }

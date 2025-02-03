@@ -15,7 +15,7 @@
         android:background="#EBEBEB"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_arrow_back"
+        app:navigationIcon="@drawable/baseline_arrow_back_ios_new_24"
         app:title="어휘력 학습" />
 
     <!-- 본문 내용 -->
