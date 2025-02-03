@@ -58,8 +58,8 @@ class WordCardFragment : Fragment(R.layout.fragment_word_card) {
             words
         }
 
-        // ✅ 단어 개수를 4개로 제한
-        wordList = wordList.take(4)
+        // ✅ `wordCount` 값에 따라 단어 개수 제한
+        wordList = wordList.take(wordCount)
 
         // ✅ ViewPager 설정
         val viewPager = binding.viewPager
@@ -69,8 +69,8 @@ class WordCardFragment : Fragment(R.layout.fragment_word_card) {
         // ✅ 처음에는 버튼 숨기기
         btnNext.visibility = View.GONE
 
-        // ✅ 단어가 4개 모드일 때만, 마지막(4번째) 단어에서 "다음" 버튼 보이게 설정
-        if (wordCount == 4) {
+        // ✅ 단어 개수가 4 또는 7일 때, 마지막 단어에서 "다음" 버튼 보이게 설정
+        if (wordCount == 4 || wordCount == 7) {
             viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
@@ -91,5 +91,6 @@ class WordCardFragment : Fragment(R.layout.fragment_word_card) {
         }
     }
 }
+
 
 
