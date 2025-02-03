@@ -1,14 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/senmain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFF2E8"
     tools:context=".fragment.HourFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="110dp"
+        android:text="자투리 시간을 알차게 보내볼까요?"
+        android:textColor="#503928"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/course1btn"
+        android:layout_width="304dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="#D1A581"
+        android:text="               어휘 4개 + 문장 만들기"
+        app:cornerRadius="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/course2btn"
+        android:layout_width="304dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#BF8B62"
+        android:text="               어휘 7개 + 문장 만들기"
+        app:cornerRadius="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/course1btn" />
+
+    <Button
+        android:id="@+id/course3btn"
+        android:layout_width="304dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#996740"
+        android:text="           어휘 9개 + 글 읽기 + 문장 만들기"
+        app:cornerRadius="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/course2btn" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="67dp"
+        app:cardBackgroundColor="#BE8A61"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/course1btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/course1btn">
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="10sp"
+            android:text="10분"
+            android:textAlignment="center"
+            android:textColor="#FDF0E6"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="67dp"
+        app:cardBackgroundColor="#996740"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/course2btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/course2btn">
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="10sp"
+            android:text="20분"
+            android:textAlignment="center"
+            android:textColor="#FDF0E6"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="67dp"
+        app:cardBackgroundColor="#764B29"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/course3btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/course3btn">
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="10sp"
+            android:text="30분"
+            android:textAlignment="center"
+            android:textColor="#FDF0E6"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

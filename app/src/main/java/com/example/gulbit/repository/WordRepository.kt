@@ -5,7 +5,7 @@ import com.example.gulbit.model.Word
 
 class WordRepository(private val dbHelper: WordDatabaseHelper) {
 
-    // ✅ 단어 추가
+    //  단어 추가
     fun insertWord(word: Word) {
         val db = dbHelper.writableDatabase
         val query = """
@@ -17,7 +17,7 @@ class WordRepository(private val dbHelper: WordDatabaseHelper) {
         db.close()
     }
 
-    // ✅ 모든 단어 가져오기
+    //  모든 단어 가져오기
     fun getAllWords(): List<Word> {
         val words = mutableListOf<Word>()
         val db = dbHelper.readableDatabase

@@ -33,9 +33,9 @@
     </fragment>
     <fragment
         android:id="@+id/nav_sentence"
-        android:name="com.example.gulbit.fragment.SententceFragment"
+        android:name="com.example.gulbit.fragment.SentenceFragment"
         android:label="fragment_sententce"
-        tools:layout="@layout/fragment_sententce" >
+        tools:layout="@layout/fragment_sentence" >
         <action
             android:id="@+id/action_sententceFragment2_to_hourFragment2"
             app:destination="@id/nav_timed_course" />
