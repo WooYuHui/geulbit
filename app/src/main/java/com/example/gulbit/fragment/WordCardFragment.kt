@@ -1,14 +1,15 @@
-
 package com.example.gulbit.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import androidx.navigation.fragment.findNavController
 import com.example.gulbit.R
 import com.example.gulbit.adapter.WordPagerAdapter
 import com.example.gulbit.database.WordDatabaseHelper
@@ -32,9 +33,13 @@ class WordCardFragment : Fragment(R.layout.fragment_word_card) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val toolbar: Toolbar = view.findViewById(R.id.toolbar) // androidx.appcompat.widget.Toolbar 사용
+        val toolbar: Toolbar = view.findViewById(R.id.toolbar)
+        val btnNext: Button = view.findViewById(R.id.btn_next)
 
-        // DB 초기화
+        // ✅ `HourFragment`에서 전달받은 단어 개수 (기본값: 20)
+        val wordCount = arguments?.getInt("wordCount", 20) ?: 20
+
+        // ✅ DB에서 단어 리스트 가져오기
         dbHelper = WordDatabaseHelper(requireContext())
         wordList = dbHelper.readableDatabase.let { dbHelper ->
             val words = mutableListOf<Word>()
@@ -53,17 +58,38 @@ class WordCardFragment : Fragment(R.layout.fragment_word_card) {
             words
         }
 
-        //  View Binding 사용하여 viewPager 접근
-        binding.viewPager.adapter = WordPagerAdapter(wordList)
-        binding.viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        // ✅ 단어 개수를 4개로 제한
+        wordList = wordList.take(4)
 
-        // 툴바를 액션바로 설정
+        // ✅ ViewPager 설정
+        val viewPager = binding.viewPager
+        viewPager.adapter = WordPagerAdapter(wordList)
+        viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+        // ✅ 처음에는 버튼 숨기기
+        btnNext.visibility = View.GONE
+
+        // ✅ 단어가 4개 모드일 때만, 마지막(4번째) 단어에서 "다음" 버튼 보이게 설정
+        if (wordCount == 4) {
+            viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    btnNext.visibility = if (position == wordList.size - 1) View.VISIBLE else View.GONE
+                }
+            })
+        }
+
+        // ✅ 버튼 클릭 시 `SentenceFragment`로 이동
+        btnNext.setOnClickListener {
+            findNavController().navigate(R.id.action_wordCardFragment_to_nav_sentence)
+        }
+
+        // ✅ 툴바 설정
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
-
-        // 내비게이션 아이콘(뒤로가기 아이콘) 클릭 리스너 설정
         toolbar.setNavigationOnClickListener {
-            // 백 버튼 클릭 시 이전 화면으로 돌아감
             requireActivity().onBackPressed()
         }
     }
 }
+
+
