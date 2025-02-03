@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true) // 뒤로가기버튼
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) // 뒤로가기 버튼
 
         textView = findViewById(R.id.contents)
         noButton = findViewById(R.id.dontKnow)
@@ -70,6 +70,7 @@ class MainActivity : AppCompatActivity() {
 
             if (!dbHelper.isBookmarkExist(word) && meaning !=null) { // 중복 검증
                 dbHelper.addBookmark(word, meaning)
+                btn1.setImageResource(R.drawable.ee)
                 Toast.makeText(this, "$word 단어가 북마크되었습니다.", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "$word 단어는 이미 북마크에 추가되어 있습니다.", Toast.LENGTH_SHORT).show()
@@ -83,11 +84,13 @@ class MainActivity : AppCompatActivity() {
 
             if (!dbHelper.isBookmarkExist(word) && meaning !=null) { // 중복 검증
                 dbHelper.addBookmark(word, meaning)
+                btn2.setImageResource(R.drawable.ee)
                 Toast.makeText(this, "$word 단어가 북마크되었습니다.", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "$word 단어는 이미 북마크에 추가되어 있습니다.", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 
 
@@ -104,7 +107,7 @@ class MainActivity : AppCompatActivity() {
             if (newsId > 0) {
                 val newsWords = dbHelper.getWordsForNews(newsId)
 
-                // 단어가 있으면 word1, word2에 설정
+                // 단어가 있으면 word1, word2, word3에 설정
                 if (newsWords.isNotEmpty()) {
                     word1.text = newsWords.getOrNull(0)?.first ?: "단어 없음"
                     word2.text = newsWords.getOrNull(1)?.first ?: "단어 없음"
@@ -113,6 +116,7 @@ class MainActivity : AppCompatActivity() {
                 // 뉴스 ID가 잘못되었을 경우 "단어 없음" 표시
                 word1.text = "단어 없음"
                 word2.text = "단어 없음"
+
             }
         }
     }
@@ -133,7 +137,7 @@ class MainActivity : AppCompatActivity() {
                 // 단어들이 있으면 word1, word2에 설정
                 if (newsWords.isNotEmpty()) {
                     word1.text = newsWords.getOrNull(0)?.first ?: "단어 없음"
-                    word2.text = newsWords.getOrNull(1)?.first ?: "단어 없음"
+                    word2.text = newsWords.getOrNull(1)?.first ?: " "
                 }
             } else {
                 // 뉴스 ID가 0인 경우 "단어 없음" 표시

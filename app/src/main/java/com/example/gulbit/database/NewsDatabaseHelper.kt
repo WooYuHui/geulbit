@@ -52,7 +52,13 @@ class NewsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         val defaultWords = listOf(
             "INSERT INTO $TABLE_WORDS ($COLUMN_NEWS_ID, $COLUMN_WORD, $COLUMN_MEANING) VALUES (1, '확증편향', '자신의 신념이나 가치관과 일치하는 정보만을 찾고, 반대되는 정보는 무시하는 사고방식')",
             "INSERT INTO $TABLE_WORDS ($COLUMN_NEWS_ID, $COLUMN_WORD, $COLUMN_MEANING) VALUES (1, '선전하다 (宣傳)', '주의나 주장, 사물의 존재, 효능 따위를 많은 사람이 알고 이해하도록 잘 설명하여 널리 알리다.')",
-            "INSERT INTO $TABLE_WORDS ($COLUMN_NEWS_ID, $COLUMN_WORD, $COLUMN_MEANING) VALUES (2, '직조하다 (織造)', '기계나 베틀 따위로 피륙을 짜다.')"
+            "INSERT INTO $TABLE_WORDS ($COLUMN_NEWS_ID, $COLUMN_WORD, $COLUMN_MEANING) VALUES (1, '배타적 (排他的)', '남을 배척하는 것.')",
+            "INSERT INTO $TABLE_WORDS ($COLUMN_NEWS_ID, $COLUMN_WORD, $COLUMN_MEANING) VALUES (2, '직조하다 (織造)', '기계나 베틀 따위로 피륙을 짜다.')",
+            "INSERT INTO $TABLE_WORDS ($COLUMN_NEWS_ID, $COLUMN_WORD, $COLUMN_MEANING) VALUES (2, '수탈하다 (收奪)', '강제로 빼앗다.')",
+            "INSERT INTO $TABLE_WORDS ($COLUMN_NEWS_ID, $COLUMN_WORD, $COLUMN_MEANING) VALUES (2, '질곡 (桎梏)', '몹시 속박하여 자유를 가질 수 없는 고통의 상태를 비유적으로 이르는 말.')",
+            "INSERT INTO $TABLE_WORDS ($COLUMN_NEWS_ID, $COLUMN_WORD, $COLUMN_MEANING) VALUES (2, '항거하다 (抗拒)', '순종하지 아니하고 맞서서 반항하다.')",
+            "INSERT INTO $TABLE_WORDS ($COLUMN_NEWS_ID, $COLUMN_WORD, $COLUMN_MEANING) VALUES (3, '기인하다 (起因)', '어떠한 것에 원인을 두다.')",
+            "INSERT INTO $TABLE_WORDS ($COLUMN_NEWS_ID, $COLUMN_WORD, $COLUMN_MEANING) VALUES (3, '토대 (土臺)', '어떤 사물이나 사업의 밑바탕이 되는 기초를 비유적으로 이르는 말.')"
         )
         defaultWords.forEach{db.execSQL(it)}
 
