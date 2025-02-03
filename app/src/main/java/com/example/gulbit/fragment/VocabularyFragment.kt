@@ -40,6 +40,20 @@ class VocabularyFragment : Fragment() {
             findNavController().navigate(R.id.action_nav_learning_to_wordCardFragment)
         }
 
+        // '시작하기' 버튼을 찾고 클릭 리스너 설정
+        val btnstart: Button = view.findViewById(R.id.btn_start)
+        btnstart.setOnClickListener {
+            // '시작하기' 버튼 클릭 시 literacyFragment로 화면 전환
+            findNavController().navigate(R.id.action_nav_learning_to_literacyFragment)
+        }
+
+        // '시작하기' 버튼을 찾고 클릭 리스너 설정
+        val btncheck: Button = view.findViewById(R.id.btn_check)
+        btncheck.setOnClickListener {
+            // '시작하기' 버튼 클릭 시 literacyFragment로 화면 전환
+            findNavController().navigate(R.id.action_nav_learning_to_reviewNoteFragment)
+        }
+
         return view
     }
 }

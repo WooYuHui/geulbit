@@ -5,8 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.navigation.fragment.findNavController
 import com.example.gulbit.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -16,10 +14,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [HourFragment.newInstance] factory method to
+ * Use the [TenMinutesFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HourFragment : Fragment(R.layout.fragment_hour) {
+class TenMinutesFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -36,13 +34,27 @@ class HourFragment : Fragment(R.layout.fragment_hour) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_hour, container, false) // 뷰를 먼저 가져오기
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_ten_minutes, container, false)
+    }
 
-        val btncourse1: Button = view.findViewById(R.id.course1btn)
-        btncourse1.setOnClickListener {
-            findNavController().navigate(R.id.action_nav_timed_course_to_tenMinutesFragment)
-        }
-
-        return view
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment TenMinutesFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            TenMinutesFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
+                }
+            }
     }
 }

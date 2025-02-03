@@ -18,6 +18,12 @@
         <action
             android:id="@+id/action_nav_learning_to_wordCardFragment"
             app:destination="@id/wordCardFragment" />
+        <action
+            android:id="@+id/action_nav_learning_to_literacyFragment"
+            app:destination="@id/literacyFragment" />
+        <action
+            android:id="@+id/action_nav_learning_to_reviewNoteFragment"
+            app:destination="@id/reviewNoteFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_timed_course"
@@ -30,6 +36,9 @@
         <action
             android:id="@+id/action_hourFragment2_to_sententceFragment2"
             app:destination="@id/nav_sentence" />
+        <action
+            android:id="@+id/action_nav_timed_course_to_tenMinutesFragment"
+            app:destination="@id/tenMinutesFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_sentence"
@@ -50,6 +59,36 @@
         tools:layout="@layout/fragment_word_card" >
         <action
             android:id="@+id/action_wordCardFragment_to_nav_learning"
+            app:destination="@id/nav_learning" />
+    </fragment>
+    <fragment
+        android:id="@+id/tenMinutesFragment"
+        android:name="com.example.gulbit.fragment.TenMinutesFragment"
+        android:label="fragment_ten_minutes"
+        tools:layout="@layout/fragment_ten_minutes" >
+        <action
+            android:id="@+id/action_tenMinutesFragment_to_nav_timed_course"
+            app:destination="@id/nav_timed_course" />
+    </fragment>
+    <fragment
+        android:id="@+id/literacyFragment"
+        android:name="com.example.gulbit.fragment.LiteracyFragment"
+        android:label="fragment_literacy"
+        tools:layout="@layout/fragment_literacy" >
+        <action
+            android:id="@+id/action_literacyFragment_to_nav_learning"
+            app:destination="@id/nav_learning" />
+        <action
+            android:id="@+id/action_literacyFragment_to_reviewNoteFragment"
+            app:destination="@id/reviewNoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewNoteFragment"
+        android:name="com.example.gulbit.fragment.ReviewNoteFragment"
+        android:label="fragment_review_note"
+        tools:layout="@layout/fragment_review_note" >
+        <action
+            android:id="@+id/action_reviewNoteFragment_to_nav_learning"
             app:destination="@id/nav_learning" />
     </fragment>
 </navigation>
