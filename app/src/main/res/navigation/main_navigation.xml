@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_nav_timed_course_to_tenMinutesFragment"
             app:destination="@id/tenMinutesFragment" />
+        <action
+            android:id="@+id/action_nav_timed_course_to_secondMinutesFragment"
+            app:destination="@id/secondMinutesFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_sentence"
@@ -69,6 +72,9 @@
         <action
             android:id="@+id/action_tenMinutesFragment_to_nav_timed_course"
             app:destination="@id/nav_timed_course" />
+        <action
+            android:id="@+id/action_tenMinutesFragment_to_tenMinutesSentenceFragment"
+            app:destination="@id/tenMinutesSentenceFragment" />
     </fragment>
     <fragment
         android:id="@+id/literacyFragment"
@@ -90,5 +96,41 @@
         <action
             android:id="@+id/action_reviewNoteFragment_to_nav_learning"
             app:destination="@id/nav_learning" />
+    </fragment>
+    <fragment
+        android:id="@+id/tenMinutesSentenceFragment"
+        android:name="com.example.gulbit.fragment.TenMinutesSentenceFragment"
+        android:label="fragment_ten_minutes_sentence"
+        tools:layout="@layout/fragment_ten_minutes_sentence" >
+        <action
+            android:id="@+id/action_tenMinutesSentenceFragment_to_tenMinutesFragment"
+            app:destination="@id/tenMinutesFragment" />
+        <action
+            android:id="@+id/action_tenMinutesSentenceFragment_to_nav_timed_course"
+            app:destination="@id/nav_timed_course" />
+    </fragment>
+    <fragment
+        android:id="@+id/secondMinutesFragment"
+        android:name="com.example.gulbit.fragment.SecondMinutesFragment"
+        android:label="fragment_second_minutes"
+        tools:layout="@layout/fragment_second_minutes" >
+        <action
+            android:id="@+id/action_secondMinutesFragment_to_nav_timed_course"
+            app:destination="@id/nav_timed_course" />
+        <action
+            android:id="@+id/action_secondMinutesFragment_to_secondMinutesSenFragment"
+            app:destination="@id/secondMinutesSenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/secondMinutesSenFragment"
+        android:name="com.example.gulbit.fragment.SecondMinutesSenFragment"
+        android:label="fragment_second_minutes_sen"
+        tools:layout="@layout/fragment_second_minutes_sen" >
+        <action
+            android:id="@+id/action_secondMinutesSenFragment_to_secondMinutesFragment"
+            app:destination="@id/secondMinutesFragment" />
+        <action
+            android:id="@+id/action_secondMinutesSenFragment_to_nav_timed_course"
+            app:destination="@id/nav_timed_course" />
     </fragment>
 </navigation>

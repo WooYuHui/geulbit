@@ -20,29 +20,31 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class HourFragment : Fragment(R.layout.fragment_hour) {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        val btnFourWords: Button = view.findViewById(R.id.course1btn)
+        val btnSecondWords: Button = view.findViewById(R.id.course2btn)
+
+        // course1btn 클릭 시 navigateToWordCard() 호출
+        btnFourWords.setOnClickListener { navigateToWordCard(4) }
+
+        // course2btn 클릭 시 navigateToWordCard() 호출
+        btnSecondWords.setOnClickListener { navigateToWordCard(7) }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_hour, container, false) // 뷰를 먼저 가져오기
-
-        val btncourse1: Button = view.findViewById(R.id.course1btn)
-        btncourse1.setOnClickListener {
-            findNavController().navigate(R.id.action_nav_timed_course_to_tenMinutesFragment)
+    // navigateToWordCard()를 수정하여 인자에 맞는 숫자 설정
+    private fun navigateToWordCard(wordCount: Int) {
+        val bundle = Bundle().apply {
+            putInt("wordCount", wordCount) // 클릭한 버튼에 따라 단어 개수 설정
         }
 
-        return view
+        // 조건에 맞는 Fragment로 이동
+        if (wordCount == 4) {
+            findNavController().navigate(R.id.action_nav_timed_course_to_tenMinutesFragment)
+        } else if (wordCount == 7) {
+            findNavController().navigate(R.id.action_nav_timed_course_to_secondMinutesFragment)
+        }
     }
 }
+
