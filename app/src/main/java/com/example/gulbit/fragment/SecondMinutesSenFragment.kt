@@ -25,7 +25,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [SecondMinutesSenFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SecondMinutesSenFragment : Fragment() {
+class SecondMinutesSenFragment : Fragment(R.layout.fragment_second_minutes_sen) {
     lateinit var dbManagerDiary: DBManager_diary
     lateinit var sqlitedb: SQLiteDatabase
 
