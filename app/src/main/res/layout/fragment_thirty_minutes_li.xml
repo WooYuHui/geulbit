@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF2E8"
+    android:fitsSystemWindows="true"
+    tools:context=".fragment.ThirtyMinutesLiFragment">
+
+    <!-- 툴바 -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar4"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#D0B7A3"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:navigationIcon="@drawable/baseline_arrow_back_ios_new_24"
+        app:title="30분 학습"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/toolbar4"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="내용을 읽고 다음 중 하나를 선택해 주세요"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/rounded_text"
+                android:text="알뜰폰 가입자의 상당수는 저렴한 요금에 만족하고 있다. 다만 AS는 문제로 지적된다. 휴대폰 앱이나 기능에 문제가 생겨 AS를 받아야 하는데, 이를 해결할 방법이 거의 없다. 알뜰폰 업계 공동의 AS센터 등이 필요하다는 지적이 나온다. 해결해야 할 문제는 산적해 있는데, 투자 여력은 여의치 않다.
+과기정통부의 정책적인 배려와 통신 3사의 양보를 받아내는 것도 중요하지만, 그것만으로는 알뜰폰 업계가 본질적인 약체 구조를 벗어나기 어렵다. 2025년은 알뜰폰 업계의 존망까지 거론되는 험난한 해가 될 것으로 보인다.
+출처 : 아이티데일리(http://www.itdaily.kr)"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dontKnow"
+                    android:textStyle="bold"
+                    android:text="잘 이해하지 못했어요"
+                    android:layout_weight="1.2"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="#D4B69F"/>
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/didKnow"
+                    android:textStyle="bold"
+                    android:text="이해했어요"
+                    android:layout_weight="1"
+                    android:backgroundTint="#D4B69F"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/explanationContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/rounded_text"
+                    android:padding="10dp"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="산적하다"
+                        android:textColor="#BC8484"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="물건이나 일이 산더미같이 쌓이다."/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/rounded_text"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="존망"
+                        android:textColor="#BC8484"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="존속과 멸망 또는 생존과 사망을 아울러 이르는 말."/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/rounded_text"
+                    android:padding="10dp"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="내용 요약"
+                        android:textColor="#BC8484"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="알뜰폰 가입자는 저렴한 요금에 만족하지만, AS 문제로 어려움을 겪고 있다. 공동 AS센터 필요성이 제기되나, 투자 여력이 부족하고, 정책적 지원만으로는 업계의 약체 구조를 벗어나기 어려워 2025년은 생존이 불확실한 해가 될 것으로 보인다."/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

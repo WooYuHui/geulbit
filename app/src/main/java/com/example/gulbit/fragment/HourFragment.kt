@@ -25,12 +25,15 @@ class HourFragment : Fragment(R.layout.fragment_hour) {
 
         val btnFourWords: Button = view.findViewById(R.id.course1btn)
         val btnSecondWords: Button = view.findViewById(R.id.course2btn)
+        val btnThirdWords: Button = view.findViewById(R.id.course3btn)
 
         // course1btn 클릭 시 navigateToWordCard() 호출
         btnFourWords.setOnClickListener { navigateToWordCard(4) }
 
         // course2btn 클릭 시 navigateToWordCard() 호출
         btnSecondWords.setOnClickListener { navigateToWordCard(7) }
+
+        btnThirdWords.setOnClickListener { navigateToWordCard(9) }
     }
 
     // navigateToWordCard()를 수정하여 인자에 맞는 숫자 설정
@@ -44,6 +47,8 @@ class HourFragment : Fragment(R.layout.fragment_hour) {
             findNavController().navigate(R.id.action_nav_timed_course_to_tenMinutesFragment)
         } else if (wordCount == 7) {
             findNavController().navigate(R.id.action_nav_timed_course_to_secondMinutesFragment)
+        }else if (wordCount == 9){
+            findNavController().navigate(R.id.action_nav_timed_course_to_thirtyMinutesFragment)
         }
     }
 }

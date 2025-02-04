@@ -45,7 +45,7 @@ class SecondMinutesFragment : Fragment(R.layout.fragment_second_minutes) {
         super.onViewCreated(view, savedInstanceState)
 
         val toolbar: Toolbar = binding.toolbar3
-        val btnNext: Button = binding.btnNext2
+        val btnNext: Button = binding.btnNext3
         val viewPager: ViewPager2 = binding.viewPager2
 
         // 데이터베이스에서 단어 가져오기

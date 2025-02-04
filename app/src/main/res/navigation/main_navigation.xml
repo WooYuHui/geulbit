@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_nav_timed_course_to_secondMinutesFragment"
             app:destination="@id/secondMinutesFragment" />
+        <action
+            android:id="@+id/action_nav_timed_course_to_thirtyMinutesFragment"
+            app:destination="@id/thirtyMinutesFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_sentence"
@@ -137,10 +140,39 @@
         android:id="@+id/thirtyMinutesFragment"
         android:name="com.example.gulbit.fragment.ThirtyMinutesFragment"
         android:label="fragment_thirty_minutes"
-        tools:layout="@layout/fragment_thirty_minutes" />
+        tools:layout="@layout/fragment_thirty_minutes" >
+        <action
+            android:id="@+id/action_thirtyMinutesFragment_to_nav_timed_course"
+            app:destination="@id/nav_timed_course" />
+        <action
+            android:id="@+id/action_thirtyMinutesFragment_to_thirtyMinutesLiFragment"
+            app:destination="@id/thirtyMinutesLiFragment" />
+    </fragment>
     <fragment
         android:id="@+id/thirtyMinutesSenFragment"
         android:name="com.example.gulbit.fragment.ThirtyMinutesSenFragment"
         android:label="fragment_thirty_minutes_sen"
-        tools:layout="@layout/fragment_thirty_minutes_sen" />
+        tools:layout="@layout/fragment_thirty_minutes_sen" >
+        <action
+            android:id="@+id/action_thirtyMinutesSenFragment_to_nav_timed_course"
+            app:destination="@id/nav_timed_course" />
+        <action
+            android:id="@+id/action_thirtyMinutesSenFragment_to_thirtyMinutesLiFragment"
+            app:destination="@id/thirtyMinutesLiFragment" />
+        <action
+            android:id="@+id/action_thirtyMinutesSenFragment_to_nav_timed_course2"
+            app:destination="@id/nav_timed_course" />
+    </fragment>
+    <fragment
+        android:id="@+id/thirtyMinutesLiFragment"
+        android:name="com.example.gulbit.fragment.ThirtyMinutesLiFragment"
+        android:label="fragment_thirty_minutes_li"
+        tools:layout="@layout/fragment_thirty_minutes_li" >
+        <action
+            android:id="@+id/action_thirtyMinutesLiFragment_to_thirtyMinutesSenFragment"
+            app:destination="@id/thirtyMinutesSenFragment" />
+        <action
+            android:id="@+id/action_thirtyMinutesLiFragment_to_thirtyMinutesFragment"
+            app:destination="@id/thirtyMinutesFragment" />
+    </fragment>
 </navigation>

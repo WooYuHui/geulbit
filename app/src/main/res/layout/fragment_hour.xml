@@ -5,7 +5,6 @@
     android:id="@+id/senmain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF2E8"
     tools:context=".fragment.HourFragment">
 
     <TextView
@@ -26,8 +25,10 @@
         android:layout_width="304dp"
         android:layout_height="72dp"
         android:layout_marginTop="60dp"
-        android:backgroundTint="#D1A581"
+        android:backgroundTint="#FDF2E9"
         android:text="               어휘 4개 + 문장 만들기"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:cornerRadius="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,8 +39,10 @@
         android:layout_width="304dp"
         android:layout_height="72dp"
         android:layout_marginTop="28dp"
-        android:backgroundTint="#BF8B62"
+        android:backgroundTint="#FDF2E9"
         android:text="               어휘 7개 + 문장 만들기"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:cornerRadius="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,8 +53,10 @@
         android:layout_width="304dp"
         android:layout_height="72dp"
         android:layout_marginTop="28dp"
-        android:backgroundTint="#996740"
+        android:backgroundTint="#FDF2E9"
         android:text="           어휘 9개 + 글 읽기 + 문장 만들기"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:cornerRadius="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +67,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="67dp"
-        app:cardBackgroundColor="#BE8A61"
+        app:cardBackgroundColor="#D0B7A3"
         app:cardCornerRadius="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/course1btn"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,12 +75,12 @@
 
         <TextView
             android:id="@+id/textView9"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:paddingTop="10sp"
             android:text="10분"
             android:textAlignment="center"
-            android:textColor="#FDF0E6"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
     </androidx.cardview.widget.CardView>
@@ -85,7 +90,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="67dp"
-        app:cardBackgroundColor="#996740"
+        app:cardBackgroundColor="#D0B7A3"
         app:cardCornerRadius="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/course2btn"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +103,7 @@
             android:paddingTop="10sp"
             android:text="20분"
             android:textAlignment="center"
-            android:textColor="#FDF0E6"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
     </androidx.cardview.widget.CardView>
@@ -108,7 +113,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="67dp"
-        app:cardBackgroundColor="#764B29"
+        app:cardBackgroundColor="#D0B7A3"
         app:cardCornerRadius="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/course3btn"
         app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +126,7 @@
             android:paddingTop="10sp"
             android:text="30분"
             android:textAlignment="center"
-            android:textColor="#FDF0E6"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
     </androidx.cardview.widget.CardView>
