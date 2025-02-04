@@ -196,7 +196,7 @@ class NewsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
 
     companion object {
         private const val DATABASE_NAME = "news_database.db"
-        private const val DATABASE_VERSION = 3
+        private const val DATABASE_VERSION = 4
         private const val TABLE_NEWS = "news"
         private const val COLUMN_NEWS_ID = "news_id"
         private const val COLUMN_DATE = "date"
