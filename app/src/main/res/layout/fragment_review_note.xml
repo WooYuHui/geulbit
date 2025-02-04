@@ -30,8 +30,9 @@
             android:text="완료"
             android:textSize="18dp"
             android:layout_gravity="center"
+            android:backgroundTint="#D0B7A3"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/rounded_button"/>
+            android:textColor="@color/black"/>
     </LinearLayout>
 
 </FrameLayout>

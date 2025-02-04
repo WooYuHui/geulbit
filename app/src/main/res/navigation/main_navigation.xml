@@ -133,4 +133,14 @@
             android:id="@+id/action_secondMinutesSenFragment_to_nav_timed_course"
             app:destination="@id/nav_timed_course" />
     </fragment>
+    <fragment
+        android:id="@+id/thirtyMinutesFragment"
+        android:name="com.example.gulbit.fragment.ThirtyMinutesFragment"
+        android:label="fragment_thirty_minutes"
+        tools:layout="@layout/fragment_thirty_minutes" />
+    <fragment
+        android:id="@+id/thirtyMinutesSenFragment"
+        android:name="com.example.gulbit.fragment.ThirtyMinutesSenFragment"
+        android:label="fragment_thirty_minutes_sen"
+        tools:layout="@layout/fragment_thirty_minutes_sen" />
 </navigation>

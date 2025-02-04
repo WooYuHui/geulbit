@@ -42,8 +42,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:background="@drawable/rounded_button"
+                android:backgroundTint="#D0B7A3"
                 android:text="잘 이해하지 못했어요"
+                android:textColor="@color/black"
                 android:layout_weight="1"
                 android:layout_marginRight="50dp"
                  />
@@ -53,9 +54,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
+                android:backgroundTint="#D0B7A3"
+                android:textColor="@color/black"
                 android:text="이해했어요"
                 android:layout_weight="4"
-                android:background="@drawable/rounded_button" />
+                 />
         </LinearLayout>
 
         <!-- 버튼 클릭시 나타나야 하는 부분 -->
